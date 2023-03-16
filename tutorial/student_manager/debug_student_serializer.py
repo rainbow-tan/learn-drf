@@ -55,7 +55,6 @@ def show_serializer():
     print(f"serializer:{serializer}")
 
 
-
 if __name__ == '__main__':
     # add_student()
     # list_student()
