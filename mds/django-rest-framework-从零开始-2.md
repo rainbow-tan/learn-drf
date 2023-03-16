@@ -188,3 +188,5 @@ def update(self, instance, validated_data):
 最后运行`student_manager/debug_student_serializer.py`，查看数据库数据
 
 ![image-20230316154031457](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316154031457.png)
+
+github：https://github.com/rainbow-tan/learn-drf

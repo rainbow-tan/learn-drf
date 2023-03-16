@@ -88,3 +88,5 @@ class Student(models.Model):
    根据提示输入用户名，密码，邮箱即可
 
    ![image-20230316103121432](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316103121432.png)
+
+github：https://github.com/rainbow-tan/learn-drf
