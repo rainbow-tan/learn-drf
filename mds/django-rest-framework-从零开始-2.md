@@ -96,3 +96,95 @@ if __name__ == '__main__':
 运行`student_manager/debug_student_serializer.py`文件，就可以看到数据库新增了一条数据
 
 ![image-20230316150335443](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316150335443.png)
+
+### （3）使用序列化类序列化对象
+
+接下来，我们使用序列化类，显示数据库的数据，首先是加载成模型对象，接下来转化为序列化类对象，最后转为JSON字符串，即可。最终通过API返回数据。
+
+- 先往数据库中添加几条数据
+
+  ![image-20230316151219631](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316151219631.png)
+
+- 在`student_manager/debug_student_serializer.py`中添加以下代码
+
+  ```python
+  from student_manager.models import Student
+  from rest_framework.renderers import JSONRenderer
+  ```
+
+  ```python
+  def list_student():
+      instance = Student.objects.get(student_id="1001")
+      serializer = StudentSerializer(instance=instance)
+      data = serializer.data
+      print(f'data:{data}')
+      content = JSONRenderer().render(serializer.data)
+      print(f'content:{content}')
+  ```
+
+  图示
+  
+  ![image-20230316151753510](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316151753510.png)
+
+说明：使用`Student`模型获取到数据库数据后，传递给`StudentSerializer`序列化类，序列化类的`data`数据就是对象的序列化信息，再通过`JSONRenderer`转为JSON字符串即可
+
+- 序列化多条数据，只需要传递`many=True`即可
+
+```python
+def list_all_students():
+    instance = Student.objects.all()
+    serializer = StudentSerializer(instance=instance, many=True)
+    data = serializer.data
+    print(f'data:{data}')
+    content = JSONRenderer().render(serializer.data)
+    print(f'content:{content.decode("utf-8")}')
+```
+
+### （4）使用序列化类修改数据
+
+要想修改数据，步骤：
+
+1. 重写序列化类中的`update`方法
+2. 从数据库获取数据，转化为模型对象
+3. 模型对象传递给序列化类
+4. 调用序列化类的`save`方法，当调用save方法时，如果传递了instance对象，则调用序列化类的update方法，否则调用序列化类的create方法。**同理，可以给save方法传递额外参数，在update函数中使用，这个用法可以记录一下，有时候有奇效**
+
+- 因此修改`student_manager/serializers.py`中的`update`方法
+
+```python
+def update(self, instance, validated_data):
+    print(f"StudentSerializer update instance:{instance}, type:{type(instance)}")
+    print(f"StudentSerializer update validated_data:{validated_data}, type:{type(validated_data)}")
+    instance.student_id = validated_data.get('student_id', instance.student_id)
+    instance.student_name = validated_data.get('student_name', instance.student_name)
+    instance.student_sex = validated_data.get('student_sex', instance.student_sex)
+    instance.student_birthday = validated_data.get('student_birthday', instance.student_birthday)
+    instance.save()
+    return instance
+```
+
+图示
+
+![image-20230316153807200](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316153807200.png)
+
+- 在`student_manager/debug_student_serializer.py`中添加代码
+
+  ```python
+  def update_student():
+      data = dict(student_id="1009",
+                  student_name="小红rename",
+                  student_sex=1,
+                  student_birthday="2020-1-19")
+      instance = Student.objects.get(student_id="1001")
+      serializer = StudentSerializer(instance=instance, data=data)
+      serializer.is_valid(True)
+      serializer.save()  # 调用save方法, 会调用到序列化类中的update方法(传递instance参数时)
+  ```
+
+图示
+
+![image-20230316153952599](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316153952599.png)
+
+最后运行`student_manager/debug_student_serializer.py`，查看数据库数据
+
+![image-20230316154031457](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316154031457.png)

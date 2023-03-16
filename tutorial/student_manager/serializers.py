@@ -6,7 +6,14 @@ from student_manager.models import Student
 class StudentSerializer(serializers.Serializer):
 
     def update(self, instance, validated_data):
-        pass
+        print(f"StudentSerializer update instance:{instance}, type:{type(instance)}")
+        print(f"StudentSerializer update validated_data:{validated_data}, type:{type(validated_data)}")
+        instance.student_id = validated_data.get('student_id', instance.student_id)
+        instance.student_name = validated_data.get('student_name', instance.student_name)
+        instance.student_sex = validated_data.get('student_sex', instance.student_sex)
+        instance.student_birthday = validated_data.get('student_birthday', instance.student_birthday)
+        instance.save()
+        return instance
 
     student_id = serializers.CharField()
     student_name = serializers.CharField()
