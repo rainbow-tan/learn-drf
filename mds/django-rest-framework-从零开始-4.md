@@ -73,7 +73,9 @@ path('student/',include('student_manager.urls'))
 
 ![image-20230316165752589](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316165752589.png)
 
-## 3、启动服务
+## 3、请求所有数据或者创建一条数据
+
+启动服务
 
 ```
 python.exe manage.py runserver 0.0.0.0:9000
@@ -104,3 +106,75 @@ python.exe manage.py runserver 0.0.0.0:9000
 GET发起请求->过中间件->到达视图->获取所有数据->序列化数据->返回数据
 
 POST发起请求->过中间件->到达视图->获取请求载体>校验请求载体->失败贼抛出异常，异常经过中间件处理，返回异常信息|成功则保存对象到数据库，返回保存的对象序列化数据
+
+## 4、请求一条数据或更新|删除一条数据
+
+上面我们可以获取全部数据以及插入数据，接下来，我们来获取一条数据，或者更新、删除数据
+
+在`student_manager/views.py`中添加详情视图
+
+```python
+@api_view(['GET', 'PUT', 'DELETE'])
+def student_detail(request, pk):
+    try:
+        student = Student.objects.get(pk=pk)
+    except Student.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = StudentSerializer(instance=student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+```
+
+图示
+
+![image-20230316172547411](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316172547411.png)
+
+在student_manager/urls.py中添加详情视图路由
+
+```
+re_path(r'detail/([0-9]+)/', student_detail),
+```
+
+图示
+
+![image-20230316173933956](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316173933956.png)
+
+接下来就是启动服务，执行GET,PUT,DELETE请求来验证
+
+- 启动服务
+
+```
+python.exe manage.py runserver 0.0.0.0:9000
+```
+
+发送GET请求
+
+![image-20230316174002118](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174002118.png)
+
+发送PUT请求
+
+![image-20230316174147807](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174147807.png)
+
+![image-20230316174225118](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174225118.png)
+
+发送DELETE请求
+
+![image-20230316174255854](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174255854.png)
+
+说明：
+
+在上面，我们可以获取所有数据，可以插入一条数据，更新一条数据，删除一条数据，基本的CRUD已经完成。
+
+github：https://github.com/rainbow-tan/learn-drf
