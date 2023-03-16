@@ -2,9 +2,12 @@ from django.db import models
 
 
 class Student(models.Model):
-    student_id = models.CharField(verbose_name="学号", max_length=30, unique=True, null=False, blank=False, db_index=True, help_text="学号最大长度为30")
-    student_name = models.CharField("姓名", max_length=30, unique=False, null=False, blank=False, db_index=True, help_text="学号最大长度为30")
-    student_sex = models.SmallIntegerField("性别", choices=[(1, '男'), (0, '女')], null=False, blank=False, help_text="1->男,0->女")
+    student_id = models.CharField(verbose_name="学号", max_length=30, unique=True, null=False, blank=False,
+                                  db_index=True, help_text="学号最大长度为30")
+    student_name = models.CharField("姓名", max_length=30, unique=False, null=False, blank=False,
+                                    db_index=True, help_text="学号最大长度为30")
+    student_sex = models.SmallIntegerField("性别", choices=[(1, '男'), (0, '女')], null=False, blank=False,
+                                           help_text="1->男,0->女")
     student_birthday = models.DateField("生日", null=False, blank=False, help_text="学生生日")
 
     id = models.AutoField(primary_key=True)

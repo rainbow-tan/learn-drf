@@ -79,4 +79,12 @@ class Student(models.Model):
    python manage.py migrate
    ```
 
-   
+4. 添加一个超级用户
+
+   ```python
+   python manage.py createsuperuser
+   ```
+
+   根据提示输入用户名，密码，邮箱即可
+
+   ![image-20230316103121432](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316103121432.png)
