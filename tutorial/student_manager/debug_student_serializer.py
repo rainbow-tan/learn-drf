@@ -50,8 +50,15 @@ def update_student():
     serializer.save()  # 调用save方法, 会调用到序列化类中的update方法(传递instance参数时)
 
 
+def show_serializer():
+    serializer = StudentSerializer()
+    print(f"serializer:{serializer}")
+
+
+
 if __name__ == '__main__':
     # add_student()
     # list_student()
     # list_all_students()
-    update_student()
+    # update_student()
+    show_serializer()
