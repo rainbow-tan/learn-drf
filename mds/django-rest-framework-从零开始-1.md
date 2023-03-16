@@ -15,3 +15,68 @@ python -m pip install djangorestframework
 
 - django-admin.exe路径![image-20230315184206598](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230315184206598.png)
 
+## 2、创建项目
+
+启动一个cmd,输入以下命令，创建项目和模型
+
+```shell
+‪F:\Python3.9.12\Scripts\django-admin.exe startproject tutorial
+cd tutorial
+python manage.py startapp student_manager
+```
+
+![image-20230316094129491](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316094129491.png)
+
+创建后的项目目录
+
+![image-20230316094425745](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316094425745.png)
+
+## 3、添加模型
+
+1. 在`tutorial/settings.py`中注册`student_manager`模型和`rest_framework`模型
+
+   ![image-20230316102048543](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316102048543.png)
+
+2. 在`student_manager/models.py`中添加Student的模型代码
+
+```python
+class Student(models.Model):
+    student_id = models.CharField(verbose_name="学号", max_length=30, unique=True, null=False, blank=False, db_index=True, help_text="学号最大长度为30")
+    student_name = models.CharField("姓名", max_length=30, unique=False, null=False, blank=False, db_index=True, help_text="学号最大长度为30")
+    student_sex = models.SmallIntegerField("性别", choices=[(1, '男'), (0, '女')], null=False, blank=False, help_text="1->男,0->女")
+    student_birthday = models.DateField("生日", null=False, blank=False, help_text="学生生日")
+
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField("创建时间", auto_now_add=True)
+    updated = models.DateTimeField("修改时间", auto_now=True)
+
+    class Meta:
+        db_table = 't_student'
+
+    def __str__(self):
+        return f"Student({self.student_id}->{self.student_name})"
+
+    def __repr__(self):
+        return self.__str__()
+
+    """
+    学习链接
+    https://blog.csdn.net/Mikowoo007/article/details/98203653
+    官网 https://docs.djangoproject.com/zh-hans/4.1/ref/models/fields/
+    """
+```
+
+图示
+
+![image-20230316101732047](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316101732047.png)
+
+3. 同步数据库
+
+   运行以下命令，同步模型到数据库，默认使用sqlite
+
+   ```python
+   python manage.py makemigrations 
+   python manage.py migrate
+   ```
+
+   
