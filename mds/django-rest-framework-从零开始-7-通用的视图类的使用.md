@@ -1,5 +1,7 @@
 django-rest-framework-从零开始-7-通用的视图类的使用
 
+## 1、前言
+
 - 之前，我们知道了有一个公共的`GenericAPIView`类，只需要将模型类和序列化类通过定义`GenericAPIView`类中`queryset`和`serializer_class`属性或者重写`GenericAPIView`类中的`get_queryset()`和`get_serializer_class()`就可以告知它我们的模型类和序列化类，这样它就能完成一般的CRUD功能。
 
 - 但是我们还需要明确写出`get`视图函数调用`list`方法，`post`视图函数调用`create`方法，`put`视图函数调用`update`方法，`delete`视图函数调用`destory`方法，这又是重复代码，因此drf又提供了功能的类，名叫`ListCreateAPIView`类和`RetrieveUpdateDestroyAPIView`类
@@ -39,5 +41,29 @@ class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
 ## 3、启动服务，测试类视图
 
 测试和之前一样。
+
+## 4、跋文
+
+最终，我们如果想要编写一个drf的项目，完成简单的CRUD，则只需要以下几步
+
+（1）定义模型，例如`class Student(models.Model):`
+
+（2）通过继承`ModelSerializer`类定义序列化类，例如`class StudentSerializer(serializers.ModelSerializer):`
+
+（3）通过继承`ListCreateAPIView`和`RetrieveUpdateDestroyAPIView`定义视图函数，例如
+
+```
+class StudentList(generics.ListCreateAPIView):
+class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
+```
+
+（4）添加路由，例如
+
+```
+path('list/', StudentList.as_view()),
+re_path(r'detail/(?P<pk>[0-9]+)/', StudentDetail.as_view()),
+```
+
+这样，就完成了一个简单的CRUD。可以通过get获取所有数据或单条数据，通过post添加一条数据，通过put修改一条数据，通过delete删除一条数据。相当简单，而且请求的流程也在脑海中，清晰可见。
 
 github：https://github.com/rainbow-tan/learn-drf
