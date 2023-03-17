@@ -1,4 +1,4 @@
-django-rest-framework-从零开始-3
+django-rest-framework-从零开始-3-序列化类ModelSerializer的使用
 
 ## 1、前言
 

@@ -46,13 +46,13 @@ from student_manager.serializers import StudentSerializer
 
 class StudentList(APIView):
     @staticmethod
-    def get(request, format=None):
-        print("==========")
+    def get(request):
         result = Student.objects.all()
         serializer = StudentSerializer(result, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    @staticmethod
+    def post(request):
         data = request.data
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
@@ -62,18 +62,19 @@ class StudentList(APIView):
 
 
 class StudentDetail(APIView):
-    def get_object(self, pk):
+    @staticmethod
+    def get_object(pk):
         try:
             return Student.objects.get(pk=pk)
         except Student.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, format=None):
+    def get(self, request, pk):
         obj = self.get_object(pk)
         serializer = StudentSerializer(instance=obj)
         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
+    def put(self, request, pk):
         snippet = self.get_object(pk)
         serializer = StudentSerializer(snippet, data=request.data)
         if serializer.is_valid():
@@ -81,7 +82,7 @@ class StudentDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
+    def delete(self, request, pk):
         obj = self.get_object(pk)
         obj.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

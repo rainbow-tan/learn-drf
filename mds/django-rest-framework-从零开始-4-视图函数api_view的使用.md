@@ -1,4 +1,4 @@
-django-rest-framework-从零开始-4
+django-rest-framework-从零开始-4-视图函数api_view的使用
 
 ## 1、前言
 

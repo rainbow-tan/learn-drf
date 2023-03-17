@@ -1,4 +1,4 @@
-django-rest-framework-从零开始-1
+django-rest-framework-从零开始-1-创建项目
 
 ## 1、下载模块
 

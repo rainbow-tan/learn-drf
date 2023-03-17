@@ -1,4 +1,4 @@
-django-rest-framework-从零开始-2
+django-rest-framework-从零开始-2-序列化类serializers.Serializer的使用
 
 ## 1、熟悉序列化
 
