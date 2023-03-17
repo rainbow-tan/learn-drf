@@ -1,7 +1,4 @@
-from django.http import Http404
-from rest_framework import status
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework import mixins, generics
 
 from student_manager.models import Student
 from student_manager.serializers import StudentSerializer
@@ -44,45 +41,75 @@ from student_manager.serializers import StudentSerializer
 #         student.delete()
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class StudentList(APIView):
-    @staticmethod
-    def get(request):
-        result = Student.objects.all()
-        serializer = StudentSerializer(result, many=True)
-        return Response(serializer.data)
+# class StudentList(APIView):
+#     @staticmethod
+#     def get(request):
+#         result = Student.objects.all()
+#         serializer = StudentSerializer(result, many=True)
+#         return Response(serializer.data)
+#
+#     @staticmethod
+#     def post(request):
+#         data = request.data
+#         serializer = StudentSerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    @staticmethod
-    def post(request):
-        data = request.data
-        serializer = StudentSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class StudentDetail(APIView):
+#     @staticmethod
+#     def get_object(pk):
+#         try:
+#             return Student.objects.get(pk=pk)
+#         except Student.DoesNotExist:
+#             raise Http404
+#
+#     def get(self, request, pk):
+#         obj = self.get_object(pk)
+#         serializer = StudentSerializer(instance=obj)
+#         return Response(serializer.data)
+#
+#     def put(self, request, pk):
+#         snippet = self.get_object(pk)
+#         serializer = StudentSerializer(snippet, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#
+#     def delete(self, request, pk):
+#         obj = self.get_object(pk)
+#         obj.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class StudentList(generics.GenericAPIView,
+                  mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  ):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
-class StudentDetail(APIView):
-    @staticmethod
-    def get_object(pk):
-        try:
-            return Student.objects.get(pk=pk)
-        except Student.DoesNotExist:
-            raise Http404
+class StudentDetail(generics.GenericAPIView,
+                    mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
 
-    def get(self, request, pk):
-        obj = self.get_object(pk)
-        serializer = StudentSerializer(instance=obj)
-        return Response(serializer.data)
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
-    def put(self, request, pk):
-        snippet = self.get_object(pk)
-        serializer = StudentSerializer(snippet, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
-    def delete(self, request, pk):
-        obj = self.get_object(pk)
-        obj.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
