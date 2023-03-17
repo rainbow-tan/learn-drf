@@ -33,6 +33,8 @@ from student_manager.models import Student
 #         return instance
 
 class StudentSerializer(serializers.ModelSerializer):
+    game_id = serializers.CharField(read_only=True)
+
     class Meta:
         model = Student
         fields = '__all__'

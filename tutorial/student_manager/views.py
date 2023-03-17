@@ -1,4 +1,7 @@
+import uuid
+
 from rest_framework import generics
+from rest_framework.response import Response
 
 from student_manager.models import Student
 from student_manager.serializers import StudentSerializer
@@ -118,7 +121,25 @@ class StudentList(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        serializer = self.get_serializer(queryset, many=True)
+        for one in serializer.data:
+            one['game_id'] = uuid.uuid4().hex
+        return Response(serializer.data)
+
 
 class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+        data['game_id'] = uuid.uuid4().hex
+        return Response(data)
