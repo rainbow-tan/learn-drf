@@ -1,12 +1,12 @@
 django-rest-framework-从零开始-2-序列化类serializers.Serializer的使用
 
-## 1、熟悉序列化
+## 1、前言
 
 我们编写的django程序，需要与前端或者其他程序交互，通常会提供出自己的API接口，此时需要把程序中的对象，转换为JSON字符串，然后返回，让对接同事获取到数据。
 
 把对象转化为JSON字符串的过程，称之为序列化。一般就是把数据库中的数据，转换为模型对象，模型对象再转换为JSON字符串。
 
-### （1）创建序列化类
+## 2、创建序列化类
 
 添加student_manager/serializers.py文件，添加以下内容
 
@@ -49,7 +49,7 @@ class StudentSerializer(serializers.Serializer):
 
 这样就完成了序列化类的编写，接下来，我们写一个测试脚本，测试一下，用序列化类添加一条记录到数据库
 
-### （2）使用序列化类添加数据
+## 3、使用序列化类添加数据
 
 我们添加一条数据到数据库，即添加一个`Student`模型对象，并保存到数据库中。
 
@@ -97,7 +97,7 @@ if __name__ == '__main__':
 
 ![image-20230316150335443](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316150335443.png)
 
-### （3）使用序列化类序列化对象
+## 4、使用序列化类序列化对象
 
 接下来，我们使用序列化类，显示数据库的数据，首先是加载成模型对象，接下来转化为序列化类对象，最后转为JSON字符串，即可。最终通过API返回数据。
 
@@ -140,7 +140,7 @@ def list_all_students():
     print(f'content:{content.decode("utf-8")}')
 ```
 
-### （4）使用序列化类修改数据
+## 5、使用序列化类修改数据
 
 要想修改数据，步骤：
 
