@@ -35,7 +35,7 @@ def students_list(request: Request):
 
 图示
 
-![image-20230316165034726](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316165034726.png)
+![image-20230316165034726](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162802933-697233569.png)
 
 说明：
 
@@ -61,7 +61,7 @@ urlpatterns = [
 
 图示
 
-![image-20230316165702424](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316165702424.png)
+![image-20230316165702424](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162803374-1067649579.png)
 
 在`tutorial/urls.py`中添加代码
 
@@ -71,7 +71,7 @@ path('student/',include('student_manager.urls'))
 
 图示
 
-![image-20230316165752589](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316165752589.png)
+![image-20230316165752589](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162803751-1013585442.png)
 
 ## 3、请求所有数据或者创建一条数据
 
@@ -83,21 +83,21 @@ python.exe manage.py runserver 0.0.0.0:9000
 
 发送GET请求获取所有数据库记录
 
-![image-20230316165932354](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316165932354.png)
+![image-20230316165932354](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162804106-1780273479.png)
 
 发送POST请求，创建一条记录
 
 - 参数不合法
 
-![image-20230316170005489](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316170005489.png)
+![image-20230316170005489](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162804497-1858244300.png)
 
 - 参数合法
 
-![image-20230316170126110](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316170126110.png)
+![image-20230316170126110](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162804814-1945915057.png)
 
 数据库
 
-![image-20230316170143720](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316170143720.png)
+![image-20230316170143720](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162805139-865567692.png)
 
 说明：
 
@@ -139,7 +139,7 @@ def student_detail(request, pk):
 
 图示
 
-![image-20230316172547411](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316172547411.png)
+![image-20230316172547411](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162805507-1511834382.png)
 
 在student_manager/urls.py中添加详情视图路由
 
@@ -149,7 +149,7 @@ re_path(r'detail/([0-9]+)/', student_detail),
 
 图示
 
-![image-20230316173933956](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316173933956.png)
+![image-20230316173933956](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162805853-346123762.png)
 
 接下来就是启动服务，执行GET,PUT,DELETE请求来验证
 
@@ -161,17 +161,17 @@ python.exe manage.py runserver 0.0.0.0:9000
 
 发送GET请求
 
-![image-20230316174002118](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174002118.png)
+![image-20230316174002118](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162806148-1723692191.png)
 
 发送PUT请求
 
-![image-20230316174147807](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174147807.png)
+![image-20230316174147807](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162806446-94851989.png)
 
-![image-20230316174225118](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174225118.png)
+![image-20230316174225118](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162806773-465272924.png)
 
 发送DELETE请求
 
-![image-20230316174255854](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316174255854.png)
+![image-20230316174255854](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321162807140-409668886.png)
 
 说明：
 

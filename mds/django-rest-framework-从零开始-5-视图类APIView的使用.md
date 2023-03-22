@@ -58,7 +58,7 @@ class StudentDetail(APIView):
 
 图示
 
-![image-20230317100253477](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317100253477.png)
+![image-20230317100253477](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321172721581-801580758.png)
 
 改造路由，修改`student_manager/urls.py`文件，修改路由
 
@@ -69,7 +69,7 @@ re_path(r'detail/([0-9]+)/', StudentDetail.as_view()),
 
 图示
 
-![image-20230317100212628](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317100212628.png)
+![image-20230317100212628](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321172722002-68375055.png)
 
 说明
 
@@ -79,11 +79,11 @@ re_path(r'detail/([0-9]+)/', StudentDetail.as_view()),
 
 - 查看`as_view()`的函数定义源代码，最终在基类`View`中，可以看到，先调用了`setup`函数，然后调用了`dispatch`函数（[学习链接](https://www.cnblogs.com/olivertian/p/11072528.html)）
 
-  ![image-20230317101404124](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317101404124.png)
+  ![image-20230317101404124](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321172722391-2068542042.png)
 
 - 查看`setup`函数和`dispatch`函数
 
-![image-20230317101908944](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317101908944.png)
+![image-20230317101908944](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321172722767-1692996143.png)
 
 可以看到，首先判断是否请求在["get","post","put","patch", "delete","head","options","trace",]中，在其中则合理，合理就会获取对象的方法，然后返回该方法。
 

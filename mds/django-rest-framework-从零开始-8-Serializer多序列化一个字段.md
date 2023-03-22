@@ -8,7 +8,7 @@ django-rest-framework-从零开始-8-Serializer多序列化一个字段
 
 例如：模型使用之前的Student模型
 
-![image-20230317160104729](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317160104729.png)
+![image-20230317160104729](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321185014592-582964659.png)
 
 - 情景：学校里面举办了一个游戏，游戏中，每个同学有一个自己的唯一的游戏ID，我们可以使用学号作为游戏ID，但为了演示新功能，我们不用学号，而是通过UUID为每个学生来生成一个游戏ID。
 - 真实场景是，数据库中记录了虚拟机的信息，但是没记录IP，毕竟IP会变，每次调用时，通过其他http接口，获取到IP,然后显示
@@ -17,7 +17,7 @@ django-rest-framework-从零开始-8-Serializer多序列化一个字段
 
 原来通过获取的返回数据和我们想显示的数据如下
 
-![image-20230317161521420](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317161521420.png)
+![image-20230317161521420](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321185015069-250769796.png)
 
 ## 2、在Serializer类中多序列化一个字段
 
@@ -40,7 +40,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 AttributeError: Got AttributeError when attempting to get a value for field `game_id` on serializer `StudentSerializer`.
 
-![image-20230317162405159](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317162405159.png)
+![image-20230317162405159](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321185015450-1778230284.png)
 
 很好理解，就是去获取字段时，通过getattr获取，获取不到，则报错，因此设置为read_only=True即可
 
@@ -89,10 +89,10 @@ class StudentDetail(generics.RetrieveUpdateDestroyAPIView):
 
 发送List视图的get请求，验证数据
 
-![image-20230317163618478](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317163618478.png)
+![image-20230317163618478](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321185015824-669514391.png)
 
 发送Detail视图的get请求
 
-![image-20230317164408598](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317164408598.png)
+![image-20230317164408598](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321185016221-376044122.png)
 
 github：https://github.com/rainbow-tan/learn-drf

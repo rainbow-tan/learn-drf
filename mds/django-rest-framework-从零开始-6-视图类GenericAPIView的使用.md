@@ -48,7 +48,7 @@ class StudentDetail(generics.GenericAPIView,
 
 图示
 
-![image-20230317111422747](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317111422747.png)
+![image-20230317111422747](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321182537509-67449576.png)
 
 修改`student_manager/urls.py`路由，指定视图参数pk
 
@@ -58,7 +58,7 @@ re_path(r'detail/(?P<pk>[0-9]+)/', StudentDetail.as_view()),
 
 图示
 
-![image-20230317134349455](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317134349455.png)
+![image-20230317134349455](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321182538050-1268119326.png)
 
 说明：
 
@@ -68,7 +68,7 @@ re_path(r'detail/(?P<pk>[0-9]+)/', StudentDetail.as_view()),
 
   - 注意：当我们重写了视图类，即重写了["get","post","put","patch", "delete","head","options","trace"]方法，在视图中，如果我们需要获取模型类时，应该调用`get_queryset()`方法，而不是访问`queryset`属性，这是drf的约定。
 
-    ![image-20230317112602261](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230317112602261.png)
+    ![image-20230317112602261](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321182538393-1526069531.png)
 
 - 我们重写了get，post,put，delete方法，这些方法都直接调用了对应mixins文件中的各个基类，完成视图的自动适配。
 

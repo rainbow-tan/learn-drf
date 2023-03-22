@@ -40,7 +40,7 @@ class StudentSerializer(serializers.Serializer):
 
 ​	图示
 
-![image-20230316144005325](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316144005325.png)
+![image-20230316144005325](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152418064-1820059071.png)
 
 说明：
 
@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
 图示：
 
-![image-20230316145312429](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316145312429.png)
+![image-20230316145312429](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152418526-47669745.png)
 
 说明：
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
 运行`student_manager/debug_student_serializer.py`文件，就可以看到数据库新增了一条数据
 
-![image-20230316150335443](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316150335443.png)
+![image-20230316150335443](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152418855-183768675.png)
 
 ## 4、使用序列化类序列化对象
 
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
 - 先往数据库中添加几条数据
 
-  ![image-20230316151219631](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316151219631.png)
+  ![image-20230316151219631](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152419175-1358464259.png)
 
 - 在`student_manager/debug_student_serializer.py`中添加以下代码
 
@@ -124,7 +124,7 @@ if __name__ == '__main__':
 
   图示
   
-  ![image-20230316151753510](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316151753510.png)
+  ![image-20230316151753510](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152419549-362161912.png)
 
 说明：使用`Student`模型获取到数据库数据后，传递给`StudentSerializer`序列化类，序列化类的`data`数据就是对象的序列化信息，再通过`JSONRenderer`转为JSON字符串即可
 
@@ -165,7 +165,7 @@ def update(self, instance, validated_data):
 
 图示
 
-![image-20230316153807200](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316153807200.png)
+![image-20230316153807200](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152419889-907070381.png)
 
 - 在`student_manager/debug_student_serializer.py`中添加代码
 
@@ -183,10 +183,10 @@ def update(self, instance, validated_data):
 
 图示
 
-![image-20230316153952599](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316153952599.png)
+![image-20230316153952599](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152420246-249912453.png)
 
 最后运行`student_manager/debug_student_serializer.py`，查看数据库数据
 
-![image-20230316154031457](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316154031457.png)
+![image-20230316154031457](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321152420616-2136743753.png)
 
 github：https://github.com/rainbow-tan/learn-drf

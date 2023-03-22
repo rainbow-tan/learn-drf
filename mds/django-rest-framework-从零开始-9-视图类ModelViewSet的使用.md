@@ -6,11 +6,11 @@ django-rest-framework-从零开始-9-视图类ModelViewSet的使用
 
 路由如下
 
-![image-20230320101213260](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320101213260.png)
+![image-20230320101213260](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190515728-973033735.png)
 
 视图类如下
 
-![image-20230320101259239](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320101259239.png)
+![image-20230320101259239](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190516143-1161472773.png)
 
 但是，他们之间，也有相同的代码，都需要指定模型类和序列化视图。那么是否有一个公用类，可以直接代替这两个类，完成最终的基类，实现只要告知一次模型类和序列化类即可。
 
@@ -26,7 +26,7 @@ class StudentViewSet(ModelViewSet):
 
 图示
 
-![image-20230320101647294](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320101647294.png)
+![image-20230320101647294](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190516489-1113197332.png)
 
 说明:
 
@@ -66,7 +66,7 @@ urlpatterns = [
 
 图示
 
-![image-20230320103137539](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320103137539.png)
+![image-20230320103137539](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190516830-2017817675.png)
 
 说明：
 
@@ -111,7 +111,7 @@ urlpatterns = [
 
 图示
 
-![image-20230320105012692](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320105012692.png)
+![image-20230320105012692](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190517240-1133771658.png)
 
 说明：
 
@@ -119,7 +119,7 @@ urlpatterns = [
 
 - 通过查看了源码，可以看到，就是把我们之前的显示表达的映射关系，给定义出来，然后映射出去。直接替我们完成了映射请求方式与处理视图的代码。
 
-  ![image-20230320105447894](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230320105447894.png)
+  ![image-20230320105447894](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321190517728-1902950032.png)
 
 ## 4、跋文
 

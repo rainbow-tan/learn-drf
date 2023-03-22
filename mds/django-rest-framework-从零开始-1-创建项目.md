@@ -11,9 +11,9 @@ python -m pip install djangorestframework
 
 - python路径
 
-![image-20230315184055374](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230315184055374.png)
+![image-20230315184055374](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151840468-158967557.png)
 
-- django-admin.exe路径![image-20230315184206598](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230315184206598.png)
+- django-admin.exe路径![image-20230315184206598](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151840975-1443118861.png)
 
 ## 2、创建项目
 
@@ -25,17 +25,17 @@ cd tutorial
 python manage.py startapp student_manager
 ```
 
-![image-20230316094129491](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316094129491.png)
+![image-20230316094129491](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151841346-118833467.png)
 
 创建后的项目目录
 
-![image-20230316094425745](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316094425745.png)
+![image-20230316094425745](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151841667-608731279.png)
 
 ## 3、添加模型
 
 1. 在`tutorial/settings.py`中注册`student_manager`模型和`rest_framework`模型
 
-   ![image-20230316102048543](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316102048543.png)
+   ![image-20230316102048543](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151841971-1745401962.png)
 
 2. 在`student_manager/models.py`中添加Student的模型代码
 
@@ -68,7 +68,7 @@ class Student(models.Model):
 
 图示
 
-![image-20230316101732047](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316101732047.png)
+![image-20230316101732047](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151842305-2118568959.png)
 
 3. 同步数据库
 
@@ -87,6 +87,6 @@ class Student(models.Model):
 
    根据提示输入用户名，密码，邮箱即可
 
-   ![image-20230316103121432](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316103121432.png)
+   ![image-20230316103121432](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321151842647-1115233899.png)
 
 github：https://github.com/rainbow-tan/learn-drf

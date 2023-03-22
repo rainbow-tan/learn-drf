@@ -19,7 +19,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 图示
 
-![image-20230316155825121](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316155825121.png)
+![image-20230316155825121](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321160921283-1315038052.png)
 
 - 查看自动生成的序列化类
 
@@ -33,7 +33,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 图示
 
-![image-20230316160628845](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316160628845.png)
+![image-20230316160628845](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321160921833-1209878078.png)
 
 运行后
 
@@ -48,7 +48,7 @@ serializer:StudentSerializer():
     updated = DateTimeField(label='修改时间', read_only=True)
 ```
 
-![image-20230316160249218](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230316160249218.png)
+![image-20230316160249218](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230321160922243-2078934054.png)
 
 说明：
 

@@ -14,7 +14,7 @@ python -m pip install drf-spectacular
 
 ### （2）注册到`tutorial/settings.py`的INSTALLED_APPS中
 
-![image-20230320201400917](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230320201400917.png)
+![image-20230320201400917](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230320203510805-1513358590.png)
 
 ### （3）设置REST_FRAMEWORK的默认配置
 
@@ -35,7 +35,7 @@ SPECTACULAR_SETTINGS = {
 
 图示
 
-![image-20230320201924599](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230320201924599.png)
+![image-20230320201924599](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230320203511343-197759250.png)
 
 ### （4）设置路由
 
@@ -49,7 +49,7 @@ path('api-doc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
 
 图示
 
-![image-20230320202824751](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230320202824751.png)
+![image-20230320202824751](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230320203511772-1938823495.png)
 
 ## 3、启动服务验证
 
@@ -63,10 +63,10 @@ python.exe manage.py runserver 0.0.0.0:9000
 
 访问http://127.0.0.1:9000/api-ui/ 则如下
 
-![image-20230320203113694](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230320203113694.png)
+![image-20230320203113694](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230320203512142-2020555983.png)
 
 访问http://127.0.0.1:9000/api-doc/则如下
 
-![image-20230320203227036](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230320203227036.png)
+![image-20230320203227036](https://img2023.cnblogs.com/blog/1768648/202303/1768648-20230320203512500-627903018.png)
 
 github：https://github.com/rainbow-tan/learn-drf
