@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
 获取到的信息如下，也打算这么返回JSON给前端
 
-![image-20230412141909930](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412141909930.png)
+![image-20230412141909930](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144631214-1774273838.png)
 
 ### 3.2、定义queryset属性
 
@@ -163,7 +163,7 @@ tutorial/urls.py文件中添加一行
 path('physical_machine/', include('physical_machine.urls')),
 ```
 
-![image-20230412141453090](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412141453090.png)
+![image-20230412141453090](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144631674-517909022.png)
 
 ### 3.6、发起请求验证
 
@@ -171,18 +171,18 @@ path('physical_machine/', include('physical_machine.urls')),
 
 获取所有物理机信息
 
-![image-20230412143701502](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412143701502.png)
+![image-20230412143701502](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144632401-1130175406.png)
 
 获取某个物理机信息
 
-![image-20230412144334370](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412144334370.png)
+![image-20230412144334370](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144634451-1247844499.png)
 
 获取不存在的机器
 
-![image-20230412144357284](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412144357284.png)
+![image-20230412144357284](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144636905-14392850.png)
 
 接口文档
 
-![image-20230412144435090](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230412144435090.png)
+![image-20230412144435090](https://img2023.cnblogs.com/blog/1768648/202304/1768648-20230412144637225-365709714.png)
 
 [github](https://github.com/rainbow-tan/learn-drf)
