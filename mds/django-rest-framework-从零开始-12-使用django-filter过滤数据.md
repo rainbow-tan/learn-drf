@@ -26,6 +26,15 @@ python -m pip install django-filter
 
 ![image-20230515144318826](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515144318826.png)
 
+```python
+class StudentViewSet(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+    filter_backends = [DjangoFilterBackend]  # 仅使用该类过滤
+    filterset_fields = ['student_name', 'student_sex', 'student_birthday']  # 过滤的字段
+```
+
 ### 3.3、验证简单过滤
 
 通过API文档测试:http://127.0.0.1:9000/api-ui/#/student/student_list
@@ -40,21 +49,52 @@ python -m pip install django-filter
 
 ![image-20230515145334753](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515145334753.png)
 
+### 3.4、默认使用DjangoFilterBackend的写法
+
+上面的写法，如果有多个视图类，则每个视图类都需要添加一行`filter_backends = [DjangoFilterBackend]`
+
+可以抽出去，默认就支持检查的字段过滤。
+
+只需要在`tutorial/tutorial/settings.py`的中`REST_FRAMEWORK`设置即可
+
+![image-20230515160759028](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515160759028.png)
+
+```python
+REST_FRAMEWORK = {
+    ...
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+}
+```
+
+然后视图类中，只需要过滤的字段即可
+
+![image-20230515160942492](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515160942492.png)
+
 ### PS：
 
-**上述的查询条件是与的关系**
+**上述的查询条件是与的关系，且查询的内容是==的关系**
 
 e.g.
 
 原数据为 墨玉麒麟	男	2023-03-23
 
-正常查询可以给定所有条件，或者只给其中一个条件
+| student_name | student_sex | student_birthday | 能查询出来吗 |
+| ------------ | ----------- | ---------------- | ------------ |
+| 墨玉麒麟     |             |                  | 能           |
+|              | 男          | 2023-03-23       | 能           |
+| 墨玉麒麟     | 男          | 2023-03-23       | 能           |
+| 墨玉         |             |                  | 不能         |
+| 麒麟         |             |                  | 不能         |
+| 墨玉麒麟     | 女          | 2023             | 不能         |
+| 墨玉麒麟     |             | 2023             | 不能         |
+| 墨玉麒麟     |             | 2023-03          | 不能         |
+| ...          | ...         | ...              | 不能         |
 
-![image-20230515145538648](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515145538648.png)
 
-但如果给定的查询条件有误，则查不出来，例如把男给成了女
 
-![image-20230515145751343](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515145751343.png)
+
+
+
 
 ## 4、自定义过滤器
 
