@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'student_manager',
     'rest_framework',
-    'drf_spectacular'
+    'drf_spectacular',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
