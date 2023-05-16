@@ -66,7 +66,7 @@ REST_FRAMEWORK = {
 }
 ```
 
-然后视图类中，只需要过滤的字段即可
+然后视图类中，只需要添加过滤的字段即可
 
 ![image-20230515160942492](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140404639-1810179745.png)
 
@@ -171,9 +171,9 @@ class StudentViewSet(ModelViewSet):
 year_is_even_number = filters.BooleanFilter('student_birthday', label='生日年份是偶数', method='filter_student_birthday')
 ```
 
-`label参数`指定的是过滤名称是`生日年份是偶数`
+`label参数`指定过滤的名称是`生日年份是偶数`
 
-`method参数`指定的是过滤函数是`filter_student_birthday`
+`method参数`指定过滤的函数是`filter_student_birthday`
 
 `第一个参数`指定过滤的字段名称是`student_birthday`
 
