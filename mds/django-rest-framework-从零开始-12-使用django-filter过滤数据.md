@@ -157,6 +157,138 @@ class StudentViewSet(ModelViewSet):
 
 视图类中同时使用`filterset_fields`和`filter_class`，测试后发现`filterset_fields`不起作用
 
+## 5、自定义过滤器之自定义过滤函数
+
+上述的过滤器都是基于字段名称和ORM的过滤，这里举一个例子，通过自定义过滤函数实现过滤效果的例子
+
+过滤功能：获取生日的年份是偶数的学生
+
+直接修改过滤器即可，步骤如下：
+
+### 5.1、指定过滤的字段与过滤的函数
+
+```
+year_is_even_number = filters.BooleanFilter('student_birthday', label='生日年份是偶数', method='filter_student_birthday')
+```
+
+`label参数`指定的是过滤名称是`生日年份是偶数`
+
+`method参数`指定的是过滤函数是`filter_student_birthday`
+
+`第一个参数`指定过滤的字段名称是`student_birthday`
+
+### 5.2、定义过滤的函数
+
+```python
+@staticmethod
+def filter_student_birthday(qs, field_name, value):
+    print(f'qs:{qs}')  # 未过滤前的数据
+    print(f'field_name:{field_name}')  # 过滤的字段
+    print(f'value:{value}')  # 前端传递的参数
+    if not value:
+        return qs
+    all_id = []
+
+    for student in qs:
+        year = student.student_birthday.strftime("%Y")
+        print(f'year:{year}')
+        if int(year) % 2 == 0:
+            all_id.append(student.id)
+    print(f'new:{all_id}')
+    students = Student.objects.filter(id__in=all_id)
+    print(f"students:{students}")
+    return students
+```
+
+过滤函数需要三个参数：
+
+- `qs`是未过滤前的数据，类型是QuerySet
+
+- `field_name`是过滤的字段，这里必然是student_birthday
+
+- `value`是前端传递的参数，因为指定的是BooleanFilter类，所以必然是True或者False
+
+完整代码如下
+
+![image-20230516105639714](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105639714.png)
+
+```python
+class StudentFilter(FilterSet):
+    year_is_even_number = filters.BooleanFilter('student_birthday', label='生日年份是偶数', method='filter_student_birthday')
+
+    class Meta:
+        model = Student
+        fields = {
+            # ...\site-packages\django_filters\conf.py 该文件中看到可选项
+            # student_name 不区分大小写的包含关系
+            "student_name": ["icontains"],
+
+            # student_birthday 大于等于 小于等于 大于 小于
+            'student_birthday': ["gte", "lte", 'gt', 'lt'],
+
+            # student_sex 完全相等
+            'student_sex': ['exact'],
+        }
+        # https://zhuanlan.zhihu.com/p/110060840
+
+    @staticmethod
+    def filter_student_birthday(qs, field_name, value):
+        print(f'qs:{qs}')  # 未过滤前的数据
+        print(f'field_name:{field_name}')  # 过滤的字段
+        print(f'value:{value}')  # 前端传递的参数
+        if not value:
+            return qs
+        all_id = []
+
+        for student in qs:
+            year = student.student_birthday.strftime("%Y")
+            print(f'year:{year}')
+            if int(year) % 2 == 0:
+                all_id.append(student.id)
+        print(f'new:{all_id}')
+        students = Student.objects.filter(id__in=all_id)
+        print(f"students:{students}")
+        return students
+```
+
+### 5.3、验证过滤器
+
+![image-20230516105732469](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105732469.png)
+
+![image-20230516105800696](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105800696.png)
+
+## 6、参考链接
+
+https://zhuanlan.zhihu.com/p/110060840
+
+https://zhuanlan.zhihu.com/p/113328475
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 [github](https://github.com/rainbow-tan/learn-drf)
