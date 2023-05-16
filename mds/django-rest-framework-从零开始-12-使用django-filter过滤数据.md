@@ -70,9 +70,9 @@ REST_FRAMEWORK = {
 
 ![image-20230515160942492](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515160942492.png)
 
-### PS：
+### 备注：
 
-**上述的查询条件是与的关系，且查询的内容是==的关系**
+**上述的查询条件是与的关系，且查询的内容是完全等于的关系**
 
 e.g.
 
@@ -90,13 +90,72 @@ e.g.
 | 墨玉麒麟     |             | 2023-03          | 不能         |
 | ...          | ...         | ...              | 不能         |
 
-
-
-
-
-
-
 ## 4、自定义过滤器
+
+### 4.1、自定义过滤类
+
+编写一个新文件，名字为`student_manager/filter.py`添加以下内容
+
+```python
+from django_filters.rest_framework import FilterSet
+
+from student_manager.models import Student
+
+
+class StudentFilter(FilterSet):
+    class Meta:
+        model = Student
+        fields = {
+            # ...\site-packages\django_filters\conf.py 该文件中看到可选项
+            # student_name 不区分大小写的包含关系
+            "student_name": ["icontains"],
+
+            # student_birthday 大于等于 小于等于 大于 小于
+            'student_birthday': ["gte", "lte", 'gt', 'lt'],
+
+            # student_sex 完全相等
+            'student_sex': ['exact'],
+        }
+        # https://zhuanlan.zhihu.com/p/110060840
+```
+
+![image-20230515172644560](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515172644560.png)
+
+#### 说明：
+
+步骤如下：
+
+- 继承FilterSet
+
+- 指定过滤的模型类
+
+- 指定过滤的字段和过滤的方式
+
+### 4.2、视图类指定过滤类
+
+在视图类中指定刚才的过滤类
+
+在`student_manager/views.py`中指定过滤类
+
+![image-20230516095639401](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516095639401.png)
+
+```python
+class StudentViewSet(ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
+
+    # filter_backends = [DjangoFilterBackend]  # 仅使用该类过滤
+    # filterset_fields = ['student_name', 'student_sex', 'student_birthday']  # 过滤的字段
+    filter_class = StudentFilter
+```
+
+### 4.3、测试过滤类
+
+![image-20230516095821807](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516095821807.png)
+
+### 备注：
+
+视图类中同时使用`filterset_fields`和`filter_class`，测试后发现`filterset_fields`不起作用
 
 
 

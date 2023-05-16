@@ -1,6 +1,6 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.viewsets import ModelViewSet
 
+from student_manager.filter import StudentFilter
 from student_manager.models import Student
 from student_manager.serializers import StudentSerializer
 
@@ -147,4 +147,5 @@ class StudentViewSet(ModelViewSet):
     serializer_class = StudentSerializer
 
     # filter_backends = [DjangoFilterBackend]  # 仅使用该类过滤
-    filterset_fields = ['student_name', 'student_sex', 'student_birthday']  # 过滤的字段
+    # filterset_fields = ['student_name', 'student_sex', 'student_birthday']  # 过滤的字段
+    filter_class = StudentFilter
