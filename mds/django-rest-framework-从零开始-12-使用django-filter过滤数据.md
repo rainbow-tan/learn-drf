@@ -16,7 +16,7 @@ python -m pip install django-filter
 
 在文件`tutorial/settings.py`中添加`django_filters`
 
-![image-20230515144239719](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515144239719.png)
+![image-20230515144239719](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140402308-1986899290.png)
 
 ### 3.2、视图类添加过滤类
 
@@ -24,7 +24,7 @@ python -m pip install django-filter
 
 简单的过滤只需添加`DjangoFilterBackend`类和过滤的列名即可
 
-![image-20230515144318826](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515144318826.png)
+![image-20230515144318826](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140402759-636963196.png)
 
 ```python
 class StudentViewSet(ModelViewSet):
@@ -39,15 +39,15 @@ class StudentViewSet(ModelViewSet):
 
 通过API文档测试:http://127.0.0.1:9000/api-ui/#/student/student_list
 
-![image-20230515144808181](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515144808181.png)
+![image-20230515144808181](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140403135-1038627923.png)
 
 通过浏览器页面测试：http://127.0.0.1:9000/student/?student_name=%E5%A2%A8%E7%8E%89%E9%BA%92%E9%BA%9F
 
-![image-20230515144933733](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515144933733.png)
+![image-20230515144933733](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140403608-2141783330.png)
 
 通过apipost测试：
 
-![image-20230515145334753](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515145334753.png)
+![image-20230515145334753](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140403976-2143509546.png)
 
 ### 3.4、默认使用DjangoFilterBackend的写法
 
@@ -57,7 +57,7 @@ class StudentViewSet(ModelViewSet):
 
 只需要在`tutorial/tutorial/settings.py`的中`REST_FRAMEWORK`设置即可
 
-![image-20230515160759028](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515160759028.png)
+![image-20230515160759028](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140404320-942643716.png)
 
 ```python
 REST_FRAMEWORK = {
@@ -68,7 +68,7 @@ REST_FRAMEWORK = {
 
 然后视图类中，只需要过滤的字段即可
 
-![image-20230515160942492](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515160942492.png)
+![image-20230515160942492](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140404639-1810179745.png)
 
 ### 备注：
 
@@ -119,7 +119,7 @@ class StudentFilter(FilterSet):
         # https://zhuanlan.zhihu.com/p/110060840
 ```
 
-![image-20230515172644560](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230515172644560.png)
+![image-20230515172644560](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140404933-2122632136.png)
 
 #### 说明：
 
@@ -137,7 +137,7 @@ class StudentFilter(FilterSet):
 
 在`student_manager/views.py`中指定过滤类
 
-![image-20230516095639401](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516095639401.png)
+![image-20230516095639401](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140405266-1503977060.png)
 
 ```python
 class StudentViewSet(ModelViewSet):
@@ -151,7 +151,7 @@ class StudentViewSet(ModelViewSet):
 
 ### 4.3、测试过滤类
 
-![image-20230516095821807](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516095821807.png)
+![image-20230516095821807](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140405606-861076912.png)
 
 ### 备注：
 
@@ -210,7 +210,7 @@ def filter_student_birthday(qs, field_name, value):
 
 完整代码如下
 
-![image-20230516105639714](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105639714.png)
+![image-20230516105639714](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140405953-1648867855.png)
 
 ```python
 class StudentFilter(FilterSet):
@@ -253,9 +253,9 @@ class StudentFilter(FilterSet):
 
 ### 5.3、验证过滤器
 
-![image-20230516105732469](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105732469.png)
+![image-20230516105732469](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140406309-2077252789.png)
 
-![image-20230516105800696](C:\Users\dell\AppData\Roaming\Typora\typora-user-images\image-20230516105800696.png)
+![image-20230516105800696](https://img2023.cnblogs.com/blog/1768648/202305/1768648-20230516140406671-212652086.png)
 
 ## 6、参考链接
 
